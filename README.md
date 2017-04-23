@@ -1,3 +1,3 @@
 # CarSalesPrediction
 
-This is a readme.
+This is a car sales prediction project.

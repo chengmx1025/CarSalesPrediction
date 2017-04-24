@@ -1,6 +1,5 @@
 import os
 import codecs
-import re
 
 def ListFilesToTxt(dir, output_file):
     files = os.listdir(dir)

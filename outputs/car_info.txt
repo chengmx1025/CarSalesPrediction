@@ -80,7 +80,7 @@
 78;长安睿骋;10.88-20.18万;三厢;1.8T 2.0L;手动 手自一体;8-9L;
 79;别克林荫大道;30.89-49.88万;三厢;2.8L 3.0L 3.6L;手自一体;11-12L;
 80;威麟X5;10.98-14.38万;SUV;2.0T;手动;9-9L;
-81;奥迪A3 Sportback;null_price;null_structure;null_emission;null_gb;null_fc;
+81;奥迪A3 Sportback;13.78-;null_structure;null_emission;null_gb;null_fc;
 82;斯柯达晶锐;6.99-10.99万;两厢;1.4L 1.6L;手动 自动;6-8L;
 83;荣威e550;23.98万;三厢;1.5L;自动;2-2L;
 84;吉利新帝豪;7.78-10.88万;SUV;1.3T 1.8L;手动 双离合;6-7L;

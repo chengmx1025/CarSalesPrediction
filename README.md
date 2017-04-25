@@ -2,6 +2,11 @@
 
 This is a car sales prediction project.
 
+## Project Structure
+data/ 给定数据</br>
+outputs/ 得到的数据</br>
+src/ 源码</br>
+
 ## Ideas
 
 ### 1 Data Integration

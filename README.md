@@ -6,6 +6,7 @@ This is a car sales prediction project.
 data/ 给定数据</br>
 outputs/ 得到的数据</br>
 src/ 源码</br>
+ideas/ 想法
 
 ## Ideas
 

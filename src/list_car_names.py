@@ -20,6 +20,17 @@ def list_car_comment():
 
     output_file.close()
 
+def list_car_comment_new():
+    dir = "../newdata/carcomment"
+    outfile = "../outputs/car_names_cc.txt"
+
+    output_file = codecs.open(outfile, "w", "GBK")
+    if not output_file:
+        print ("cannot open the file %s for writing" % outfile)
+    listFilesToTxt(dir, output_file)
+
+    output_file.close()
+
 def list_bdi_and_sales():
     df_baidu = pd.read_csv("../data/Automobile_baiduIndex.csv", encoding='GBK')
     df_sales = pd.read_csv("../data/Automobile_sales.csv", encoding='GBK')
@@ -37,8 +48,9 @@ def list_bdi_and_sales():
     output_file.close()
 
 def main():
-    list_car_comment()
+    #list_car_comment()
     list_bdi_and_sales()
+    list_car_comment_new()
 
 if __name__ == "__main__":
     main()

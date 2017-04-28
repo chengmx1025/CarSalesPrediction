@@ -16,14 +16,23 @@ def main():
     '''
      each car's bdIndex
     '''
-    t0 = df_baidu[df_baidu['name']=="丰田凯美瑞"]
-    print(t0)
+    #t0 = df_baidu[df_baidu['name']=="丰田凯美瑞"]
+    #print(t0)
 
     '''
     Use groupby() to see 
     '''
-    t1 = df_baidu.groupby('name').sum()
-    print(t1)
+    #t1 = df_baidu.groupby('name').sum()
+    #print(t1)
+
+
+    '''
+    cc
+    '''
+
+    t2 = df_car1
+    print(t2)
+    print(len(t2))
 
 if __name__ == "__main__":
     main()

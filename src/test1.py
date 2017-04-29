@@ -6,28 +6,19 @@ def main():
     Read csv files: (encoding='GBK') 
     '''
     df = pd.read_csv("../outputs/car_info_new.csv",encoding='GBK')
-    print(df)
+    df = df.drop('#',1)
+    #print(df)
 
     df2 = pd.read_csv("../outputs/car_comment_output.txt",encoding='GBK')
-    print(df2)
+    df2 = df2.drop('nan',1)
+    #print(df2)
 
+    #print(df.info(),df2.info())
 
+    df3 = pd.merge(df,df2,left_on=['car_name'], right_on=['car_name'])
+    print(df3)
 
-    '''
-     each car's bdIndex
-    '''
-    #t0 = df_baidu[df_baidu['name']=="丰田凯美瑞"]
-    #print(t0)
-
-    '''
-    Use groupby() to see 
-    '''
-    #t1 = df_baidu.groupby('name').sum()
-    #print(t1)
-
-    '''
-    cc
-    '''
+    df3.to_csv("car_info_2.csv",encoding='gbk')
 
 
 if __name__ == "__main__":

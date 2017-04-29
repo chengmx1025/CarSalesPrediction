@@ -1,4 +1,4 @@
-car_name, bdi_num,
+car_name, bdi_num,nan
 广汽传祺GA8,15763,
 广汽传祺GA6,12421,
 广汽传祺GA5,16900,

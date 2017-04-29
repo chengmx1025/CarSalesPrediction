@@ -17,7 +17,7 @@ def main():
     list_car_names = getCarNames()
 
     output_file = codecs.open("../outputs/car_comment_output.txt", "w", "GBK")
-    output_file.write("#, car_name, bdi_num,\n")
+    output_file.write("car_name, bdi_num,\n")
 
     num = 0
     for each_car_name in list_car_names:
@@ -28,7 +28,7 @@ def main():
             df_car = pd.read_csv(cc_input_csv_file, encoding='GBK')
 
             car = []
-            car.append(str(num))
+            #car.append(str(num))
             car.append(each_car_name)
             car.append(str(len(df_car)))
 
@@ -41,7 +41,7 @@ def main():
 
             num += 1
         else:
-            output_file.write("null," + each_car_name + ",null,\n")
+            output_file.write("" + each_car_name + ",null,\n")
 
     output_file.close()
 

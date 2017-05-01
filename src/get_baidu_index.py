@@ -30,6 +30,9 @@ def main():
             car = []
             #car.append(str(num))
             car.append(each_car_name)
+
+            print(df_car)
+
             car.append(str(len(df_car)))
 
             print(car)

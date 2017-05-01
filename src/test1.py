@@ -18,7 +18,7 @@ def main():
     df3 = pd.merge(df,df2,left_on=['car_name'], right_on=['car_name'])
     print(df3)
 
-    df3.to_csv("car_info_2.csv",encoding='gbk')
+    #df3.to_csv("car_info_2.csv",encoding='gbk')
 
 
 if __name__ == "__main__":

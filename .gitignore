@@ -2,4 +2,3 @@ data/carcomment/*
 .DS_Store
 data/*
 .idea/*
-newdata/

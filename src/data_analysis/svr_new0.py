@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 import numpy as np
 from sklearn.svm import SVR
@@ -9,72 +10,127 @@ from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
 from sklearn.metrics import precision_recall_fscore_support
 
+from sklearn.preprocessing import normalize
+
 def main():
 
     '''
     Read Data from csv file
     Get X and y for the SVR model
     '''
-    df1 = pd.read_csv("../../newdata/car_info_newest.csv",encoding='GBK')
-    df1 = df1.drop('car_name',1)
-    #print(df1)
-    df2 = pd.read_csv("../../newdata/car_sales_new.csv",encoding='GBK')
-    #print(df2)
-    df3 = pd.merge(df1,df2,left_on=['car_id'], right_on=['car_id'])
-    #print(df3)
-    #df3.to_csv("car_svr.csv")
-    df4 = df3.drop('data_value',1)
-    X = np.array(df4)
-    #print(X)
+    '''
+    df1 = pd.read_csv("../../newdata/train_new.csv",encoding='GBK')
+    df2 = pd.read_csv("../../newdata/test_new.csv", encoding='GBK')
+
+    df_train = df1.drop(['sales'],1)
+    df_test = df2.drop(['sales'],1)
+
+    X_train = np.array(df_train)
+    X_test = np.array(df_test)
+
+    normalize(X_train)
+    normalize(X_test)
+
+    y_train = []
+    for i in range(len(df1)):
+        y_train.append(df1['sales'][i])
+    y_train = np.array(y_train)
+
+    y_test = []
+    for i in range(len(df2)):
+        y_test.append(df2['sales'][i])
+    y_test = np.array(y_test)
+
+    print(X_train)
+    print(X_test)
+    print(y_train)
+    print(y_test)
+    '''
+
+    df = pd.read_csv("../../newdata/car_new_data.csv", encoding='GBK')
+    dfx = df.drop(['#','sales','year','month'], 1)
+    dfxx = dfx.loc[:,['car_id','time']]
+    X = np.array(dfxx)
+    X = normalize(X)
+
     y = []
-    for i in range(len(df3)):
-        y.append(df3['data_value'][i])
+    for i in range(len(df)):
+        y.append(df['sales'][i])
     y = np.array(y)
+
+    #print(X)
     #print(y)
 
 
     '''
     Split the Training Data & Test Data
     '''
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=57)
+
+    print(X_train)
+    print(X_test)
+    print(y_train)
+    print(y_test)
 
 
     '''
     SVR Model Training
     '''
-    svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
+    svr_rbf1 = SVR(kernel='rbf', C=1e3, gamma=0.1)
+    svr_rbf2 = SVR(kernel='rbf', C=1e4, gamma=0.1)
+    svr_rbf3 = SVR(kernel='rbf', C=1e3, gamma=0.01)
     svr_lin = SVR(kernel='linear', C=1e3)
     svr_poly = SVR(kernel='poly', C=1e3, degree=2)
 
+    print(time.time())
     print("y_true:")
     print(y_test)
 
-    y_rbf = svr_rbf.fit(X_train, y_train).predict(X_test)
-    print("y_rbf:")
-    print(y_rbf)
+    y_rbf1 = svr_rbf1.fit(X_train, y_train).predict(X_test)
+    print(time.time())
+    print("y_rbf1:")
+    print(y_rbf1)
+
+    y_rbf2 = svr_rbf2.fit(X_train, y_train).predict(X_test)
+    print(time.time())
+    print("y_rbf2:")
+    print(y_rbf2)
+
+    y_rbf3 = svr_rbf3.fit(X_train, y_train).predict(X_test)
+    print(time.time())
+    print("y_rbf3:")
+    print(y_rbf3)
 
     y_lin = svr_lin.fit(X_train, y_train).predict(X_test)
+    print(time.time())
     print("y_lin:")
     print(y_lin)
 
     y_poly = svr_poly.fit(X_train, y_train).predict(X_test)
+    print(time.time())
     print("y_poly:")
     print(y_poly)
 
+
     '''
-    save result
+    save result into csv file
     '''
     result  = []
     result.append(y_test)
-    result.append(y_rbf)
+    result.append(y_rbf1)
+    result.append(y_rbf2)
+    result.append(y_rbf3)
     result.append(y_lin)
     result.append(y_poly)
 
     result = np.array(result)
-    result = result.T
 
-    resultdf = pd.DataFrame(result)
-    resultdf.to_csv("svr_result.csv")
+    new_result = np.row_stack((result, X_test.T))
+
+    new_result = new_result.T
+
+    result_df = pd.DataFrame(new_result)
+    result_df.to_csv("svr_new0_result.csv")
 
     '''
     Model Evaluation

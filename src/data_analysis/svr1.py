@@ -42,39 +42,44 @@ def main():
     '''
     SVR Model Training
     '''
-    svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
-    svr_lin = SVR(kernel='linear', C=1e3)
-    svr_poly = SVR(kernel='poly', C=1e3, degree=2)
+    svr_rbf1 = SVR(kernel='rbf', C=1e3, gamma=0.1)
+    svr_rbf2 = SVR(kernel='rbf', C=1e4, gamma=0.1)
+    svr_rbf3 = SVR(kernel='rbf', C=1e3, gamma=0.01)
+
+    y_rbf1 = svr_rbf1.fit(X_train, y_train).predict(X_test)
+    y_rbf2 = svr_rbf2.fit(X_train, y_train).predict(X_test)
+    y_rbf3 = svr_rbf3.fit(X_train, y_train).predict(X_test)
+
 
     print("y_true:")
     print(y_test)
 
-    y_rbf = svr_rbf.fit(X_train, y_train).predict(X_test)
     print("y_rbf:")
-    print(y_rbf)
+    print(y_rbf1)
 
-    y_lin = svr_lin.fit(X_train, y_train).predict(X_test)
-    print("y_lin:")
-    print(y_lin)
+    print("y_rbf:")
+    print(y_rbf2)
 
-    y_poly = svr_poly.fit(X_train, y_train).predict(X_test)
-    print("y_poly:")
-    print(y_poly)
+    print("y_rbf:")
+    print(y_rbf3)
+
 
     '''
     save result
     '''
+
     result  = []
     result.append(y_test)
-    result.append(y_rbf)
-    result.append(y_lin)
-    result.append(y_poly)
+    result.append(y_rbf1)
+    result.append(y_rbf2)
+    result.append(y_rbf3)
 
     result = np.array(result)
     result = result.T
 
     resultdf = pd.DataFrame(result)
-    resultdf.to_csv("svr_result.csv")
+    resultdf.to_csv("svr_result2.csv")
+
 
     '''
     Model Evaluation

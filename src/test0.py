@@ -29,9 +29,13 @@ def main():
     cc
     '''
 
-    t2 = df_car1
-    print(t2)
-    print(len(t2))
+    #t2 = df_car1
+    #print(t2)
+    #print(len(t2))
+
+
+    a = df_baidu['name'].drop_duplicates()
+    print(len(a))
 
 if __name__ == "__main__":
     main()

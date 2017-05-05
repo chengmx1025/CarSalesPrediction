@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 import numpy as np
 from sklearn.svm import SVR
@@ -9,72 +10,76 @@ from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
 from sklearn.metrics import precision_recall_fscore_support
 
+
+
 def main():
 
     '''
-    Read Data from csv file
+    Read Training Data & TestData from csv file
     Get X and y for the SVR model
     '''
-    df1 = pd.read_csv("../../newdata/car_info_newest.csv",encoding='GBK')
-    df1 = df1.drop('car_name',1)
-    #print(df1)
-    df2 = pd.read_csv("../../newdata/car_sales_new.csv",encoding='GBK')
-    #print(df2)
-    df3 = pd.merge(df1,df2,left_on=['car_id'], right_on=['car_id'])
-    #print(df3)
-    #df3.to_csv("car_svr.csv")
-    df4 = df3.drop('data_value',1)
-    X = np.array(df4)
-    #print(X)
-    y = []
-    for i in range(len(df3)):
-        y.append(df3['data_value'][i])
-    y = np.array(y)
-    #print(y)
+    df1 = pd.read_csv("../../newdata/car_train_data.csv",encoding='GBK')
+    df2 = pd.read_csv("../../newdata/car_test_data.csv", encoding='GBK')
 
+    df_train = df1.drop(['sales'],1)
+    df_test = df2.drop(['sales'],1)
 
-    '''
-    Split the Training Data & Test Data
-    '''
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+    X_train = np.array(df_train)
+    X_test = np.array(df_test)
 
+    y_train = []
+    for i in range(len(df1)):
+        y_train.append(df1['sales'][i])
+    y_train = np.array(y_train)
 
-    '''
-    SVR Model Training
-    '''
+    y_test = []
+    for i in range(len(df2)):
+        y_test.append(df2['sales'][i])
+    y_test = np.array(y_test)
+
+    print(X_train)
+    print(X_test)
+    print(y_train)
+    print(y_test)
+
     svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
     svr_lin = SVR(kernel='linear', C=1e3)
     svr_poly = SVR(kernel='poly', C=1e3, degree=2)
 
-    print("y_true:")
-    print(y_test)
+    print("start time: %s" % time.time())
 
+    '''
     y_rbf = svr_rbf.fit(X_train, y_train).predict(X_test)
     print("y_rbf:")
     print(y_rbf)
+    print("finish time: %s" % time.time())
+
 
     y_lin = svr_lin.fit(X_train, y_train).predict(X_test)
     print("y_lin:")
     print(y_lin)
+    print("finish time: %s" % time.time())
+    '''
 
     y_poly = svr_poly.fit(X_train, y_train).predict(X_test)
     print("y_poly:")
     print(y_poly)
+    print("finish time: %s" % time.time())
+
+
 
     '''
     save result
     '''
-    result  = []
+    result = []
     result.append(y_test)
-    result.append(y_rbf)
-    result.append(y_lin)
-    result.append(y_poly)
+    result.append(y_rbf1)
 
     result = np.array(result)
     result = result.T
 
     resultdf = pd.DataFrame(result)
-    resultdf.to_csv("svr_result.csv")
+    resultdf.to_csv("svr_result_output.csv")
 
     '''
     Model Evaluation

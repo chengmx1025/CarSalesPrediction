@@ -47,16 +47,22 @@ def main():
     print(y_test)
     '''
 
+    d_car_id = 2
+
     df = pd.read_csv("../../newdata/car_new_data.csv", encoding='GBK')
-    dfx = df.drop(['#','sales','year','month'], 1)
-    dfxx = df.loc[:,['car_id','year','month','time']]
-    dfxxx = df.drop(['#','sales','car_id'], 1)
-    X = np.array(dfxxx)
+    #dfx = df.drop(['#','sales','year','month'], 1)
+    #dfxx = df.loc[:,['car_id','year','month','time']]
+    #dfxxx = df.drop(['#','sales','car_id'], 1)
+
+    dfsc = df[df['car_id']==d_car_id].drop(['sales','#','car_id'],1)
+
+    X = np.array(dfsc)
     #X = normalize(X)
 
     y = []
     for i in range(len(df)):
-        y.append(df['sales'][i])
+        if(df['car_id'][i]==d_car_id):
+            y.append(df['sales'][i])
     y = np.array(y)
     #print(X)
     #print(y)
@@ -130,7 +136,7 @@ def main():
     new_result = new_result.T
 
     result_df = pd.DataFrame(new_result)
-    result_df.to_csv("svr_new0_result.csv")
+    result_df.to_csv("svr_single0.csv")
 
     '''
     Model Evaluation

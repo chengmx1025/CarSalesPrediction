@@ -22,7 +22,7 @@ def main():
     #print(df2)
     df3 = pd.merge(df1,df2,left_on=['car_id'], right_on=['car_id'])
     #print(df3)
-    #df3.to_csv("car_svr.csv")
+    df3.to_csv("car_svr.csv")
     df4 = df3.drop('data_value',1)
     X = np.array(df4)
     #print(X)

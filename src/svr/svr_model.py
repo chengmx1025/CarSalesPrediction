@@ -19,18 +19,20 @@ def main():
     Get X and y for the SVR model
     '''
 
-    df1 = pd.read_csv("train_data.csv",encoding='GBK')
-    df2 = pd.read_csv("test_data.csv", encoding='GBK')
+    df1 = pd.read_csv("train_data.csv")
+    df2 = pd.read_csv("test_data.csv")
     df3 = pd.read_csv("normalize.csv")
 
-    df_train = df1.drop(['sales'],1)
-    df_test = df2.drop(['sales'],1)
+    #df_train = df1.drop(['sales','car_id'],1)
+    #df_test = df2.drop(['sales','car_id'],1)
+    df_train = df1.loc[:,['car_id','month','year','time']]
+    df_test = df1.loc[:, ['car_id', 'month', 'year', 'time']]
 
     X_train = np.array(df_train)
     X_test = np.array(df_test)
 
-    #normalize(X_train)
-    #normalize(X_test)
+    normalize(X_train)
+    normalize(X_test)
 
     df4 = pd.merge(df1,df3,left_on=['car_id'], right_on=['car_id'])
     #print(df4)
@@ -53,11 +55,10 @@ def main():
         #print(my_sales)
     y_test = np.array(y_test)
 
-    #print(X_train)
-    #print(X_test)
-    #print(y_train)
-    #print(y_test)
-
+    print(X_train)
+    print(X_test)
+    print(y_train)
+    print(y_test)
 
     '''
     df = pd.read_csv("../../newdata/car_new_data.csv", encoding='GBK')
@@ -93,6 +94,7 @@ def main():
     svr_lin = SVR(kernel='linear', C=1e3)
     svr_poly = SVR(kernel='poly', C=1e3, degree=2)
 
+
     print(time.time())
     print("y_true:")
     print(y_test)
@@ -107,21 +109,20 @@ def main():
     print("y_rbf2:")
     print(y_rbf2)
 
-    y_rbf3 = svr_rbf3.fit(X_train, y_train).predict(X_test)
-    print(time.time())
-    print("y_rbf3:")
-    print(y_rbf3)
+    #y_rbf3 = svr_rbf3.fit(X_train, y_train).predict(X_test)
+    #print(time.time())
+    #print("y_rbf3:")
+    #print(y_rbf3)
 
-    y_lin = svr_lin.fit(X_train, y_train).predict(X_test)
-    print(time.time())
-    print("y_lin:")
-    print(y_lin)
+    #y_lin = svr_lin.fit(X_train, y_train).predict(X_test)
+    #print(time.time())
+    #print("y_lin:")
+    #print(y_lin)
 
-    y_poly = svr_poly.fit(X_train, y_train).predict(X_test)
-    print(time.time())
-    print("y_poly:")
-    print(y_poly)
-
+    #y_poly = svr_poly.fit(X_train, y_train).predict(X_test)
+    #print(time.time())
+    #print("y_poly:")
+    #print(y_poly)
 
     '''
     save result into csv file
@@ -130,19 +131,15 @@ def main():
     result.append(y_test)
     result.append(y_rbf1)
     result.append(y_rbf2)
-    result.append(y_rbf3)
-    result.append(y_lin)
-    result.append(y_poly)
-
+    #result.append(y_rbf3)
+    #result.append(y_lin)
+    #result.append(y_poly)
     result = np.array(result)
 
     new_result = np.row_stack((result, X_test.T))
-
     new_result = new_result.T
-
     result_df = pd.DataFrame(new_result)
     result_df.to_csv("svr_model_result.csv")
-
 
 
 if __name__ == "__main__":

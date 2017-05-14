@@ -1,34 +1,34 @@
 # CarSalesPrediction
 
-This is a car sales prediction project.
+Given car sales data, reviews data over the past ten years, we build a model to predict the sales volume for each car in the future.
 
-## File Structure
-data/ 给定数据</br>
-outputs/ 得到的数据</br>
-src/ 源码</br>
-ideas/ 想法
+## Procedure of Our Work
 
-## Ideas
+### 1 Data PreProcessing
+#### 1.1 Crawling Data from the Internet
+#### 1.2 Data Transformation
+1) Concert string values into num values</br>
+2) Convert Attribute with multi values into Multi Attributes with single values</br>
+3) Data Normalization
+#### 1.3 Data Cleaning
+Noise & Outlier Data Detection 
+#### 1.4 Data Integration
+1) Join Tables on 'car_id'
 
-### 1 Data Integration
-相同车名的不同表示</br>
-e.g. 奥迪A6 奥迪a6
+### 2 Feature Engineering
+1) car_bd_index - monthly average baidu index for each car </br>
+2) car_comment - monthly average number of bbs comments for each car </br>
+3) car_info - each car info </br>
 
+### 3 Model Selection & Training Models
+1) Linear Method: Linear Regression</br>
+2) Probability Method: Bayes Regression</br>
+3) Neural Network Method: Multi Layer Propagation Regression</br>
 
-### 2 爬数据
-指导价</br>	
-车身结构</br>
-排量</br>	
-变速箱</br>
-油耗</br>
+### 4 Result Evaluation
+1) Mean Square Error</br>
 
-
-### 3 FEATURES
-1)car_bd_index - </br>
-2)car_comment - </br>
-3)car_info - </br>
-
-### 4 MODELS
-1)Linear Regression</br>
-2)Bayes</br>
-3)NN MLPR</br>
+## Project File Structure
+1) data/ - Data given & Data crawled on the Internet</br>
+2) src/ - source code</br>
+3) outputs/ - outputs</br>

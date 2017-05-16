@@ -1,17 +1,19 @@
 # CarSalesPrediction
 
-Given car sales data, reviews data over the past ten years, we build a model to predict the sales volume for each car in the future.
+Given car sales data, reviews data over the past ten years, we build a model to predict the sales volume for each car.
 
 ## Procedure of Our Work
 
 ### 1 Data PreProcessing
-#### 1.1 Crawling Data from the Internet
+#### 1.1 Data Source
+1) Dealing with the data given</br>
+2) Crawling Data from the Internet
 #### 1.2 Data Transformation
 1) Concert string values into num values</br>
 2) Convert Attribute with multi values into Multi Attributes with single values</br>
 3) Data Normalization
 #### 1.3 Data Cleaning
-Noise & Outlier Data Detection 
+1) Noise & Outlier Data Detection 
 #### 1.4 Data Integration
 1) Join Tables on 'car_id'
 

@@ -25,7 +25,7 @@ Given car sales data, reviews data over the past ten years, we build a model to 
 ### 3 Model Selection & Training Models
 1) Linear Method: Linear Regression</br>
 2) Probability Method: Bayes Regression</br>
-3) Neural Network Method: Multi Layer Propagation Regression</br>
+3) Neural Network Method: Multilayer Perceptron Regression (MLPR)</br>
 
 ### 4 Result Evaluation
 1) Mean Square Error</br>
